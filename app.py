@@ -1,2 +1,2 @@
 my_variable = "HELLO CLASS"
-print(my_variable.islower())
+print(my_variable)
