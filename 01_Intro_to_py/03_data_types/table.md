@@ -3,7 +3,7 @@
 | String |Int             |List             |Dictionary     |Set          |True        |bytes       |None     |
 |        |Float           |Tuple            |               |Frozenset    |False       |bytearray   |         |
 |        |Complex         |Range            |               |             |            |memoryview  |         |
-|_____________________________________________________________________________________________________________|
+|                                                                                                             |
 
 ```py
 x = "Hello World"	#string	
@@ -60,3 +60,42 @@ print(type(z))
 # Complex
 
 
+Complex numbers are written with a "j" as the imaginary part:
+
+```py
+x = 3+5j
+y = 5j
+z = -5j
+
+print(type(x))
+print(type(y))
+print(type(z))
+```
+
+### Type Conversion
+
+- You can convert from one type to another with the int(), float(), and complex() methods:
+
+
+```py
+x = 1    # int
+y = 2.8  # float
+z = 1j   # complex
+
+#convert from int to float:
+a = float(x)
+
+#convert from float to int:
+b = int(y)
+
+#convert from int to complex:
+c = complex(x)
+
+print(a)
+print(b)
+print(c)
+
+print(type(a))
+print(type(b))
+print(type(c))
+```
