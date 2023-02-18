@@ -1,0 +1,232 @@
+START
+    DECLARE patientName, period: STRING
+    DECLARE aptDay, gender, visitType: CHARACTER
+    DECLARE age, aptTime, option, totalOfficeVisit, totalPhysicalVisit, totalScreeningVisit,totalVisit: INTEGER
+    DECLARE cost, morning_fee, total_cost, registration_fee, totalCharges: REAL
+    totalOfficeVisit = 0
+    totalPhysicalVisit = 0
+    totalScreeningVisit = 0
+    totalVisit = 0
+    cost = 0.0
+    morning_fee = 0.0
+    total_cost = 0.0
+    registration_fee = 4500.00
+    totalCharges = 0.0
+
+    PRINT "*******Welcome to Doctor Mitchell's Appointment and Billing System *******"
+    PRINT "Please enter your name (Enter 'no' to exit): "
+    INPUT patientName
+
+    WHILE patientName != 'no' OR patientName != 'No' OR patientName != 'nO' OR patientName != 'NO' DO
+        PRINT "Please enter your age (Must be between 12 and 100 inclusive): "
+        INPUT age
+
+        WHILE age < 12 OR age > 100 DO
+            PRINT "The age entered is invalid. Please enter an age that is between 12 and 100 inclusive."
+            PRINT "Please enter your age: "
+            INPUT age
+        ENDWHILE
+
+        PRINT "Please enter your gender (M for male, F for female): "
+        INPUT gender
+
+        WHILE gender != 'M' OR gender != 'm' OR age != 'F' OR age != 'f'  DO
+            PRINT "The gender entered is invalid. Ensure that you enter M for male and F for female"
+            PRINT "Please enter your gender (M for male, F for female): "
+            INPUT gender
+        ENDWHILE
+
+        PRINT "Please select whether your appointment will be on a weekday (Enter 1) or a weekend (Enter 2): "
+        INPUT option
+
+        WHILE option != 1 OR option != 2 DO
+            PRINT "Invalid option entered."
+            PRINT "Please select whether your appointment will be on a weekday (Enter 1) or a weekend (Enter 2): "
+            INPUT option
+        ENDWHILE
+
+        SWITCH (option) DO
+            CASE 1:
+                PRINT "Enter the day of your appointment"
+                PRINT "M for Monday, T for Tuesday, W for Wednesday, H for Thursday, F for Friday "
+                INPUT aptDay
+
+                WHILE aptDay != 'M' OR aptDay != 'm' OR aptDay != 'T' OR aptDay != 't' OR aptDay != 'W' OR aptDay != 'w' OR aptDay != 'H' OR aptDay != 'h' OR aptDay != 'F' OR aptDay != 'f' DO
+                    PRINT "The day entered was either invalid or not a weekday. Please enter a weekday"
+                    PRINT "Enter the day of your appointment"
+                    PRINT "M for Monday, T for Tuesday, W for Wednesday, H for Thursday, F for Friday"
+                    INPUT aptDay
+                ENDWHILE
+
+                PRINT "Enter the type of visit"
+                PRINT "O for Office Visit, P for Physical, S for Screening "
+                INPUT visitType
+
+                WHILE visitType != 'O' OR visitType != 'o' OR visitType != 'P' OR visitType != 'p' OR visitType != 'S' OR visitType != 's' DO
+                    PRINT "The visit type entered is invalid. Please enter a valid visit type"
+                    PRINT "Enter the type of visit"
+                    PRINT "O for Office Visit, P for Physical, S for Screening "
+                    INPUT visitType
+                ENDWHILE
+
+                PRINT "For Weekday appointments, the time should be between 8AM-8PM"
+                PRINT "Enter the time of the appointment: "
+                INPUT aptTime
+                PRINT "Enter the period of the appointment (AM or PM): "
+                INPUT period
+
+                WHILE period != 'am' OR period != 'pm' OR period != 'Am' OR period != 'Pm' OR period != 'AM' OR period != 'PM' OR period != 'pM' OR period != 'aM' DO
+                    PRINT "The period entered is invalid. Please enter a valid period"
+                    PRINT "Enter the period of the appointment (AM or PM): "
+                    INPUT period
+                ENDWHILE
+
+                WHILE (period == 'am' OR period == 'AM' OR period == 'Am' OR period == 'aM' AND aptTime < 8) OR (period == 'pm' OR period == 'PM' OR period == 'Pm' OR period == 'pM' AND (aptTime > 8 AND aptTime != 12)) DO
+                    PRINT "The time entered is invalid."
+                    PRINT "For Weekday appointment, the time should be between 8AM-8PM"
+                    PRINT "Enter the time of the appointment: "
+                    INPUT aptTime
+                ENDWHILE
+
+                IF visitType == 'O' OR visitType == 'o' THEN
+                    IF period == 'am' OR period == 'AM' OR period == 'Am' OR period == 'aM' THEN
+                        cost = 3000.00
+                        morning_fee = 2000.00
+                        total_cost = cost + morning_fee + registration_fee
+                    ELSE
+                        cost = 3800.00
+                        morning_fee = 0.0
+                        total_cost = cost + morning_fee + registration_fee
+                    ENDIF
+                    totalOfficeVisit = totalOfficeVisit + 1
+                    totalVisit = totalVisit + 1
+                ELSE IF visitType == 'P' OR visitType == 'p' THEN
+                    IF period == 'am' OR period == 'AM' OR period == 'Am' OR period == 'aM' THEN
+                        cost = 8000.00
+                        morning_fee = 2000.00
+                        total_cost = cost + morning_fee + registration_fee
+                    ELSE
+                        cost = 8900.00
+                        morning_fee = 0.0
+                        total_cost = cost + morning_fee + registration_fee
+                    ENDIF
+                    totalPhysicalVisit = totalPhysicalVisit + 1
+                    totalVisit = totalVisit + 1
+                ELSE IF visitType == 'S' OR visitType == 's' THEN
+                    IF period == 'am' OR period == 'AM' OR period == 'Am' OR period == 'aM' THEN
+                        cost = 15500.00
+                        morning_fee = 2000.00
+                        total_cost = cost + morning_fee + registration_fee
+                    ELSE
+                        cost = 16700.00
+                        morning_fee = 0.0
+                        total_cost = cost + morning_fee + registration_fee
+                    ENDIF
+                    totalScreeningVisit = totalScreeningVisit + 1
+                    totalVisit = totalVisit + 1
+                ENDIF
+                totalCharges = totalCharges + total_cost
+                BREAK
+            CASE 2:
+                PRINT "Enter the day of your appointment"
+                PRINT "S for Saturday, U for Sunday "
+                INPUT aptDay
+
+                WHILE aptDay != 'S' OR aptDay != 's' OR aptDay != 'U' OR aptDay != 'u' DO
+                    PRINT "The day entered was either invalid or not a weekends. Please enter a weekend day"
+                    PRINT "Enter the day of your appointment"
+                    PRINT "S for Saturday, U for Sunday "
+                    INPUT aptDay
+                ENDWHILE
+
+                PRINT "Enter the type of visit"
+                PRINT "O for Office Visit, P for Physical, S for Screening "
+                INPUT visitType
+
+                WHILE visitType != 'O' OR visitType != 'o' OR visitType != 'P' OR visitType != 'p' OR visitType != 'S' OR visitType != 's' DO
+                    PRINT "The visit type entered is invalid. Please enter a valid visit type"
+                    PRINT "Enter the type of visit"
+                    PRINT "O for Office Visit, P for Physical, S for Screening "
+                    INPUT visitType
+                ENDWHILE
+
+                PRINT "For Weekend appointments, the time should be between 10AM-4PM"
+                PRINT "Enter the time of the appointment: "
+                INPUT aptTime
+                PRINT "Enter the period of the appointment (AM or PM): "
+                INPUT period
+
+                WHILE period != 'am' OR period != 'pm' OR period != 'Am' OR period != 'Pm' OR period != 'AM' OR period != 'PM' OR period != 'pM' OR period != 'aM' DO
+                    PRINT "The period entered is invalid. Please enter a valid period"
+                    PRINT "Enter the period of the appointment (AM or PM): "
+                    INPUT period
+                ENDWHILE
+
+                WHILE (period == 'am' OR period == 'AM' OR period == 'Am' OR period == 'aM' AND aptTime < 10) OR (period == 'pm' OR period == 'PM' OR period == 'Pm' OR period == 'pM' AND (aptTime > 4 AND aptTime != 12)) DO
+                    PRINT "The time entered is invalid."
+                    PRINT "For Weekend appointments, the time should be between 10AM-4PM"
+                    PRINT "Enter the time of the appointment: "
+                    INPUT aptTime
+                ENDWHILE
+
+                IF visitType == 'O' OR visitType == 'o' THEN
+                    IF period == 'am' OR period == 'AM' OR period == 'Am' OR period == 'aM' THEN
+                        cost = 3000.00
+                        total_cost = cost + registration_fee
+                    ELSE
+                        cost = 3800.00
+                        total_cost = cost + registration_fee
+                    ENDIF
+                    totalOfficeVisit = totalOfficeVisit + 1
+                    totalVisit = totalVisit + 1
+                ELSE IF visitType == 'P' OR visitType == 'p' THEN
+                    IF period == 'am' OR period == 'AM' OR period == 'Am' OR period == 'aM' THEN
+                        cost = 8000.00
+                        total_cost = cost + registration_fee
+                    ELSE
+                        cost = 8900.00
+                        total_cost = cost + registration_fee
+                    ENDIF
+                    totalPhysicalVisit = totalPhysicalVisit + 1
+                    totalVisit = totalVisit + 1
+                ELSE IF visitType == 'S' OR visitType == 's' THEN
+                    IF period == 'am' OR period == 'AM' OR period == 'Am' OR period == 'aM' THEN
+                        cost = 15500.00
+                        total_cost = cost + registration_fee
+                    ELSE
+                        cost = 16700.00
+                        total_cost = cost + registration_fee
+                    ENDIF
+                    totalScreeningVisit = totalScreeningVisit + 1
+                    totalVisit = totalVisit + 1
+                ENDIF
+                totalCharges = totalCharges + total_cost
+                BREAK
+        ENDSWITCH
+
+        PRINT "*******APPOINTMENT INFORMATION FOR ", patientName, "*******"
+        PRINT "NAME: ", patientName
+        PRINT "AGE: ", age
+        PRINT "GENDER: ", gender
+        PRINT "APPOINTMENT DAY: ", aptDay
+        PRINT "APPOINTMENT TIME: ", aptTime, period
+        PRINT "REGISTRATION FEE: ", registration_fee
+        PRINT "TYPE OF VISIT: ", visitType
+        PRINT "COST OF VISIT (Includes a morning fee for weekday morning visits): ", cost
+        PRINT "TOTAL COST: ", total_cost
+        PRINT "*************************************************************"
+        PRINT ""
+        
+        PRINT "Please enter your name (Enter 'No' to exit): "
+        INPUT patientName
+    ENDWHILE
+
+    PRINT "*******APPOINTMENT AND BILLING SYSTEM INVOICE*******"
+    PRINT "TOTAL OFFICE VISIT: ", totalOfficeVisit
+    PRINT "TOTAL PHYSICAL VISIT: ", totalPhysicalVisit
+    PRINT "TOTAL SCREENING VISIT: ", totalScreeningVisit
+    PRINT "TOTAL VISITS PROCESSED: ", totalVisit
+    PRINT "TOTAL AMOUNT OF CHARGES: ", totalCharges
+    PRINT "*************************************************************"
+    PRINT "Thank you for using the system."
+END

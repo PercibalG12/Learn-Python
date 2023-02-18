@@ -5,7 +5,7 @@ deposit = 0.0
 
 if Building_type == "Residential" or Building_type =="residential":
     if loan >= 0 and loan <= 5000000:
-        deposit = 0.025 * loan
+        deposit = 0.025 * loan 
         
     elif loan  >= 5000001 and loan <= 10000000:
          deposit = 15000 +( loan - 5000000 ) * 0.0312

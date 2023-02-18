@@ -83,7 +83,7 @@ y = 2.8  # float
 z = 1j   # complex
 
 #convert from int to float:
-a = float(x)
+a = float(x) #1.0
 
 #convert from float to int:
 b = int(y)
